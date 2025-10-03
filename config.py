@@ -6,7 +6,7 @@ class Config:
     BASE_DIR = Path(__file__).parent
     DATA_DIR = BASE_DIR / "data"
     PROCESSED_DIR = DATA_DIR / "processed"
-    CSV_FILE = DATA_DIR / "SB_publications_PMC.csv"
+    CSV_FILE = DATA_DIR / "SB_publication_PMC.csv"
     
     # Create directories
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
