@@ -21,7 +21,14 @@ class DataIngestion:
         """Scrape full text from PubMed Central"""
         for attempt in range(max_retries):
             try:
-                response = requests.get(pmc_url, timeout=10)
+                headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                  "AppleWebKit/537.36 (KHTML, like Gecko) "
+                  "Chrome/113.0.0.0 Safari/537.36",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.google.com/"
+}
+                response = requests.get(pmc_url, headers=headers, timeout=10)
                 response.raise_for_status()
                 soup = BeautifulSoup(response.content, 'lxml')
                 
