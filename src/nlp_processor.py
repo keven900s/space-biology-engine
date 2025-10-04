@@ -22,12 +22,27 @@ class NLPProcessor:
         if not text or len(text) < 50:
             return "Summary not available"
         
+        # Check word count
+        word_count = len(text.split())
+        
+        # If text is too short, return as-is
+        if word_count < 50:
+            return text
+        
         try:
+            # Adaptive max_length based on input
+            max_length = min(max_length, max(30, word_count // 2))
+            min_length = max(10, max_length // 3)
+            
             # Truncate to model limits
             text = text[:1024]
-            summary = self.summarizer(text, max_length=max_length, min_length=30, do_sample=False)
+            summary = self.summarizer(text, 
+                                     max_length=max_length, 
+                                     min_length=min_length, 
+                                     do_sample=False)
             return summary[0]['summary_text']
-        except:
+        except Exception as e:
+            # Fallback: return first 200 chars
             return text[:200] + "..."
     
     def extract_entities(self, text):
