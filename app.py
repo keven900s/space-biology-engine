@@ -10,7 +10,14 @@ import time
 import math
 
 st.set_page_config(page_title="ExoBio Insights", page_icon="🚀", layout="wide")
-
+hide_streamlit_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    </style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # --- Enhanced CSS with animated starfield + subtle bio particles ---
 st.markdown("""
 <style>
